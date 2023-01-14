@@ -12,7 +12,7 @@ const Contact = () => {
     console.warn(name, email, message);
     const UserId = JSON.parse(localStorage.getItem("user"))._id;
     console.warn(UserId);
-    let result = await fetch("https://ankit-blog-backend.herokuapp.com/contacts", {
+    let result = await fetch("https://klemo-blog-server.onrender.com/contacts", {
       method: "post",
       body: JSON.stringify({ name, email, message }),
       headers: {

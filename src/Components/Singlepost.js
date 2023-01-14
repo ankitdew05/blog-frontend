@@ -36,14 +36,14 @@ function Singlepost() {
   const [blogs, setBlogs] = useState([]);
 
   const getBlogs = async () => {
-    let result = await fetch("https://ankit-blog-backend.herokuapp.com/blogs", {});
+    let result = await fetch("https://klemo-blog-server.onrender.com/blogs/limit");
     result = await result.json();
     setBlogs(result);
   };
 
   const getsingleBlog = async () => {
     console.warn(params);
-    let result = await fetch(`https://ankit-blog-backend.herokuapp.com/blogs/${params.key}`);
+    let result = await fetch(`https://klemo-blog-server.onrender.com/blogs/${params.key}`);
     result = await result.json();
     console.warn(result);
     setTitle(result.title);
@@ -56,7 +56,7 @@ function Singlepost() {
   const sendReply = async () => {
     console.warn(name, comment, blogname);
 
-    let result = await fetch("https://ankit-blog-backend.herokuapp.com/add-comment", {
+    let result = await fetch("https://klemo-blog-server.onrender.com/add-comment", {
       method: "post",
       body: JSON.stringify({ name, comment, blogname }),
       headers: {
@@ -71,7 +71,7 @@ function Singlepost() {
   const searchHandle = async (event) => {
     let key = event.target.value;
     if (key) {
-      let result = await fetch(`https://ankit-blog-backend.herokuapp.com/search/${key}`);
+      let result = await fetch(`https://klemo-blog-server.onrender.com/search/${key}`);
       result = await result.json();
       if (result) {
         setBlogs(result);
@@ -159,27 +159,41 @@ function Singlepost() {
       </section>
     </div>*/
     <div>
-      <nav>
-        <div className="grid grid-cols-2 p-5 bg-gray-300 w-full fixed">
-          <div className="grid grid-cols-3 font-bold">
-            <h1 className="text-right pl-5 hover:text-xl">
-              <Link to="/">Home</Link>
+     <nav>
+        <div className="md:grid md:grid-cols-7 p-5  bg-blue-100 w-full fixed">
+          <div className="md:grid md:grid-cols-3 md:col-span-2 md:col-start-2 font ">
+            <div className=" pl-5 flex">
+              <img
+                className="h-9 w-32 "
+                src="https://i.ibb.co/P6p1X8s/Logo-removebg-preview-1.png"
+              ></img>
+            </div>
+          </div>
+          <div className="flex text-gray-600 md:col-span-2">
+            <h1 className="text-right text-xl pl-5 hover:text-xl">
+              <a target="_blank" href="https://klemo.co/home">
+                Home
+              </a>
             </h1>
-            <h1 className="text-right hover:text-xl ">
-              <Link to="/news">News</Link>
+            <h1 className="text-right pl-5 text-xl   hover:text-xl">
+              <a target="_blank" href="https://klemo.co/service">
+                Services
+              </a>
             </h1>
-            <h1 className="text-right hover:text-xl ">
-              <Link to="/contacts">Contact</Link>
+            <h1 className="text-right pl-5 text-xl  hover:text-xl">
+              <a target="_blank" href="https://klemo.co/contact">
+                Contact
+              </a>
             </h1>
           </div>
-          <div className="grid grid-cols-2 justify-items-center">
+          <div className="md:grid md:grid-cols-2 md:col-span-2 justify-items-start">
             <input
-              className="bg-gray-100 hover:text-xl md:w-1/2 text-black  hover:bg-gray-500 rounded-lg text-left"
+              className="bg-gray-100 px-3 hover:text-xl md:w-1/2 text-black  hover:bg-gray-500 rounded-lg text-left"
               type="text"
-              placeholder="Search"
+              placeholder="Search.."
               onChange={searchHandle}
             ></input>
-            <div className="grid gap-5 grid-cols-3 text-left sm:visible invisible sm:justify-items-center ">
+            {/* <div className="grid gap-5 grid-cols-3 text-left sm:visible invisible sm:justify-items-center ">
               <a
                 target="_blank"
                 href="https://www.facebook.com/ankit.dewangan.395454/"
@@ -198,7 +212,7 @@ function Singlepost() {
               >
                 <AiFillLinkedin class="text-xl"></AiFillLinkedin>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </nav>
@@ -232,7 +246,7 @@ function Singlepost() {
         </div>
 
         {blogs.map((value) => (
-          <div className="hidden lg:block lg:col-span-1">
+          <div className="hidden lg:block  lg:col-span-1">
             <div className="flex flex-col ">
               <div>
                 <img className="p-6" src={value.url}></img>
@@ -247,7 +261,7 @@ function Singlepost() {
                 <p className="pt-2 text-left text-[.8rem]">{value.summary}</p>
                 <p className="pt-3 text-left text-sm text-red-700 font-semibold"
                 onClick={refreshPage}>
-                  <Link to={"/singlepost/" + value.key}>Read More....</Link>
+                  <Link to={"/singlepost/"+value.key}>Read More....</Link>
                 </p>
               </div>
             </div>
